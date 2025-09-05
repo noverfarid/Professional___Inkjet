@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>مركز صيانة الطابعات — الإسكندرية</title>
+  <meta name="description" content="صيانة طابعات HP و Epson في الإسكندرية — سرعة، التزام، وضمان. اطلب صيانة الآن عبر واتساب أو الهاتف."/>
+  <style>
+    :root {
+      --hp-blue: #0071ce;
+      --hp-blue-600: #005a9e;
+      --hp-blue-700: #004b82;
+      --hp-dark: #0b2239;
+      --hp-light: #e6f2ff;
+      --bg: #f7f9fc;
+      --white: #ffffff;
+      --muted: #6b7280;
+      --shadow: 0 8px 24px rgba(0,0,0,.1);
+      --radius: 14px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: 'Cairo', Tahoma, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--hp-dark);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    /* NAVBAR */
+    .nav {
+      background: var(--white);
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      border-bottom: 1px solid #eef2f7;
+      z-index: 999;
+      transition: transform .4s ease;
+    }
+    .nav.hidden { transform: translateY(-100%); }
+    .nav .wrap {
+      max-width: 1200px; margin: 0 auto; padding: 12px 16px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .brand { display: flex; align-items: center; gap: 10px; }
+    .brand img { width: 44px; height: 44px; border-radius: 50%; border: 3px solid var(--hp-blue); }
+    .brand h1 { font-size: 1rem; margin: 0; color: var(--hp-dark); font-weight: 800; }
+
+    .menu { display: flex; gap: 8px; }
+    .menu a {
+      padding: 8px 14px; border-radius: 10px; font-weight: 700;
+      color: var(--hp-blue-700); transition: all .3s;
+    }
+    .menu a:hover { background: var(--hp-light); color: var(--hp-blue-600); }
+    .menu a.active { background: var(--hp-blue); color: #fff; }
+
+    /* HERO */
+    .hero {
+      position: relative; text-align: center; padding: 110px 16px 90px;
+      background: url('https://source.unsplash.com/1600x700/?printer,office') center/cover no-repeat;
+    }
+    .hero::after { content: ""; position: absolute; inset: 0; background: rgba(0, 37, 71, .65); }
+    .hero .inner { position: relative; z-index: 1; max-width: 1000px; margin: auto; animation: fadeIn 1.2s ease; }
+    .logo {
+      width: 110px; height: 110px; border-radius: 50%; margin: 0 auto 16px;
+      border: 4px solid var(--hp-blue);
+      animation: bounceIn 1.2s ease;
+    }
+    .hero h2 { font-size: clamp(1.8rem, 4vw, 3rem); color: #d7eaff; margin: 10px 0; }
+    .hero p { color: #f0f9ff; margin-bottom: 20px; }
+    .cta {
+      background: var(--hp-blue); color: #fff; padding: 14px 22px; border-radius: 12px;
+      font-weight: 800; display: inline-block; transition: all .3s; animation: fadeUp 1.4s ease;
+    }
+    .cta:hover { background: var(--hp-blue-600); transform: translateY(-3px); }
+
+    section { padding: 70px 16px; }
+    .wrap { max-width: 1200px; margin: auto; }
+    h3.title { text-align: center; font-size: 1.8rem; margin-bottom: 30px; color: var(--hp-dark); }
+
+    /* TEAM */
+    .team { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; }
+    .card {
+      background: #fff; border-radius: var(--radius); padding: 20px; box-shadow: var(--shadow);
+      transition: transform .3s, box-shadow .3s;
+      animation: fadeUp 1s ease;
+    }
+    .card:hover { transform: translateY(-6px) scale(1.02); box-shadow: 0 14px 28px rgba(0,0,0,.15); }
+    .avatar { width: 140px; height: 140px; border-radius: 50%; margin: 0 auto 15px; object-fit: cover; }
+    .card h4 { color: var(--hp-blue-700); margin-bottom: 6px; }
+    .btn {
+      background: var(--hp-blue); color: #fff; padding: 10px 14px; border-radius: 10px; font-weight: 700;
+      display: inline-block; transition: all .3s;
+    }
+    .btn:hover { background: var(--hp-blue-600); transform: scale(1.05); }
+
+    /* BADGES */
+    .badges { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px; }
+    .badge {
+      background: #fff; border-radius: 12px; padding: 16px; font-weight: 800;
+      text-align: center; color: var(--hp-blue-700); box-shadow: var(--shadow);
+      animation: fadeIn 1s ease;
+    }
+
+    /* TESTIMONIALS (shared style for static & user comments) */
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
+    .quote {
+      background: #fff; padding: 18px; border-radius: var(--radius); box-shadow: var(--shadow);
+      font-style: normal; animation: fadeUp 0.6s ease; direction: rtl; text-align: right;
+      position: relative; overflow: visible;
+    }
+    .quote .quote-header { display:flex; align-items:center; gap:10px; justify-content:space-between; }
+    .quote .author { font-weight:800; color:var(--hp-blue-700); }
+    .quote .stars { color:gold; }
+    .quote .quote-text { margin-top:12px; color:#444; line-height:1.6; }
+
+    /* Options menu (for user comments) */
+    .options-menu { position: relative; }
+    .options-btn {
+      background: none; border: none; font-size: 20px; cursor: pointer; color: #666; padding:6px; border-radius:8px;
+      transition: transform .18s ease, color .18s ease;
+    }
+    .options-btn:hover { transform: rotate(90deg); color: var(--hp-blue); }
+    .options-list {
+      display: none; position: absolute; top: 38px; left: auto; right: 6px; /* align to the right in RTL */
+      background: #fff; border-radius: 10px; list-style: none; padding: 6px 0; min-width: 140px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.12); z-index: 99; overflow: hidden;
+      transform-origin: top right;
+    }
+    .options-list.show { display:block; animation: dropdown .14s ease; }
+    .options-list li { padding: 10px 14px; cursor:pointer; white-space: nowrap; }
+    .options-list li:hover { background: var(--hp-light); color: var(--hp-blue); }
+
+    @keyframes dropdown { from { opacity:0; transform: translateY(-6px) scale(.98);} to { opacity:1; transform: translateY(0) scale(1);} }
+
+    /* COMMENTS FORM */
+    .comment-form {
+      max-width: 800px; margin: 0 auto 20px; background:#fff; padding:18px; border-radius:12px; box-shadow:var(--shadow);
+      direction: rtl; text-align: right;
+    }
+    .comment-form input, .comment-form textarea { width:100%; padding:10px; margin:8px 0; border-radius:8px; border:1px solid #ddd; font-size:14px; }
+    .star-rating { display:flex; gap:8px; justify-content:flex-start; direction: ltr; }
+    .star-rating span { font-size:22px; color:#ccc; cursor:pointer; transition: transform .12s; }
+    .star-rating span.selected { color: gold; transform: translateY(-3px); }
+    .submit-btn { background: linear-gradient(135deg,var(--hp-blue),#00a6ff); color:#fff; padding:12px 16px; border-radius:10px; border:none; font-weight:800; cursor:pointer; box-shadow:0 6px 18px rgba(0,0,0,0.08); }
+
+    .notify { display:none; margin-bottom:12px; padding:10px 12px; border-radius:8px; background:#e6ffed; color:#065f2a; font-weight:700; text-align:center; }
+    /* FOOTER */
+    footer {
+      background: var(--hp-dark);
+      color: #fff;
+      text-align: center;
+      padding: 40px 20px;
+      margin-top: 50px;
+      position: relative;
+      overflow: hidden;
+    }
+    footer .contact-item {
+      font-size: 1rem;
+      margin: 12px 0;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 0.8s forwards;
+    }
+    footer .contact-item:nth-child(1){ animation-delay:0.2s; }
+    footer .contact-item:nth-child(2){ animation-delay:0.4s; }
+    footer .contact-item:nth-child(3){ animation-delay:0.6s; }
+    footer .contact-item:nth-child(4){ animation-delay:0.8s; font-weight:800; color:var(--hp-light); }
+
+    /* small screens tweaks */
+    @media (max-width:600px) { .brand h1 { display:none; } .grid { grid-template-columns: 1fr; } }
+
+  </style>
+</head>
+<body>
+  <!-- NAVBAR -->
+  <nav class="nav" id="navbar">
+    <div class="wrap">
+      <div class="brand">
+        <img src="C:\Users\noveer\Desktop\صيانتك فى مكانك\img\Professional Inkjet.jpg" alt="شعار المركز"/>
+        <h1>مركز صيانة الطابعات — الإسكندرية</h1>
+      </div>
+      <div class="menu">
+        <a href="#home">الرئيسية</a>
+        <a href="#about">فريق العمل</a>
+        <a href="#trust">لماذا نحن</a>
+        <a href="#testimonials">الآراء</a>
+        <a href="#comments">التعليقات</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header id="home" class="hero">
+    <div class="inner">
+      <img class="logo" src="C:\Users\noveer\Desktop\صيانتك فى مكانك\img\Professional Inkjet.jpg" alt="شعار"/>
+      <h2>طابعتك وقفت؟ الحل عندنا</h2>
+      <p>5 سنوات خبرة — 500 ماكينة مُصلحة — التزام كامل بالمواعيد</p>
+      <a class="cta" href="https://wa.me/201208628278" target="_blank">📱 اطلب صيانة الآن</a>
+    </div>
+  </header>
+
+  <!-- TEAM -->
+  <section id="about">
+    <div class="wrap">
+      <h3 class="title">فريق العمل</h3>
+      <div class="team">
+        <div class="card">
+          <img class="avatar" src="C:\Users\noveer\Desktop\صيانتك فى مكانك\img\khaledd.jpg" alt="المهندس خالد" />
+          <h4>م/ خالد أسامه</h4>
+          <p>متخصص صيانة HP Inkjet</p>
+          <a class="btn" href="tel:01208628278">📞 اتصل: 01208628278</a>
+        </div>
+        <div class="card">
+          <img class="avatar" src="C:\Users\noveer\Desktop\صيانتك فى مكانك\img\mohammed.jpg" alt="المهندس محمد" />
+          <h4>م/ محمد سيد</h4>
+          <p>خبير صيانة Epson &amp; HP • قطع غيار أصلية</p>
+          <a class="btn" href="tel:01221889324">📞 اتصل: 01221889324</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRUST -->
+  <section id="trust">
+    <div class="wrap">
+      <h3 class="title">ليه تختارنا؟</h3>
+      <div class="badges">
+        <div class="badge">✅ خبرة 5 سنوات</div>
+        <div class="badge">✅ 500 جهاز متصلح</div>
+        <div class="badge">✅ صيانة وأنت معانا</div>
+        <div class="badge">✅ بدون خلط ألوان</div>
+        <div class="badge">✅ ضمان علي الصيانه 50 الف لقطه علي البورت المتغيرة</div>
+        <div class="badge">✅ صيانة فورية داخل وخارج إسكندرية</div>
+        <div class="badge">✅ موديلات Epson WF &amp; HP Inkjet</div>
+        <div class="badge">✅ أحبار SKY VISION + شحن</div>
+        <div class="badge">✅ قطع غيار (مواتير، حساسات، بكر...)</div>
+        <div class="badge">✅ أسعار خاصة للقطاعي والمهندسين</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section id="testimonials">
+    <div class="wrap">
+      <h3 class="title">عملاؤنا بيقولوا إيه؟</h3>
+      <div id="testimonialsGrid" class="grid">
+        <!-- ثابت: لا يتغير -->
+        <div class="quote">
+          <div class="quote-header">
+            <div>
+              <div class="author">أحمد — سموحة</div>
+              <div class="stars">⭐⭐⭐⭐⭐</div>
+            </div>
+          </div>
+          <div class="quote-text">"المهندسين دول أنقذوني، خلصوا شغلي في وقت قياسي والتعامل راقي جداً."</div>
+        </div>
+
+        <div class="quote">
+          <div class="quote-header">
+            <div>
+              <div class="author">محمد — المنشية</div>
+              <div class="stars">⭐⭐⭐⭐⭐</div>
+            </div>
+          </div>
+          <div class="quote-text">"طابعاتي كانت واقفة، رجعوها شغالة أحسن من الأول."</div>
+        </div>
+
+        <div class="quote">
+          <div class="quote-header">
+            <div>
+              <div class="author">محمود — ميامي</div>
+              <div class="stars">⭐⭐⭐⭐⭐</div>
+            </div>
+          </div>
+          <div class="quote-text">"التزام غير طبيعي في المواعيد وأسعار ممتازة."</div>
+        </div>
+
+        <!-- user comments will be appended here by JS (same visual style) -->
+      </div>
+    </div>
+  </section>
+
+  <!-- COMMENTS (form) -->
+  <section id="comments">
+    <div class="wrap">
+      <h3 class="title">شارك برأيك</h3>
+
+      <div id="notify" class="notify" role="status" aria-live="polite">تم إضافة تعليقك بنجاح ✅</div>
+
+      <form id="commentForm" class="comment-form" onsubmit="return false;">
+        <input type="text" id="nameInput" placeholder="اسمك (اختياري)">
+        <div class="star-rating" id="rating">
+          <span data-value="5">★</span>
+          <span data-value="4">★</span>
+          <span data-value="3">★</span>
+          <span data-value="2">★</span>
+          <span data-value="1">★</span>
+        </div>
+        <textarea id="textInput" placeholder="اكتب تعليقك هنا..." required></textarea>
+        <div style="text-align:center; margin-top:8px;"><button id="submitComment" class="submit-btn">إرسال التعليق</button></div>
+      </form>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>📞 للتواصل: 01221889324 — 01152262465</p>
+    <p>📱 واتساب: <a href="https://wa.me/201208628278" target="_blank">01208628278</a></p>
+    <p>الإسكندرية — خدمة داخل وخارج النطاق</p>
+    <p style="font-weight:800; margin-top:8px;">إحنا مش بنصلح طابعتك بس… إحنا بنرجعلك شغلك للحياة</p>
+  </footer>
+
+  <script>
+    /*************** Helper & state ***************/
+    const KEY = 'site_user_comments_v1'; // localStorage key
+    let userComments = JSON.parse(localStorage.getItem(KEY) || '[]');
+
+    const testimonialsGrid = document.getElementById('testimonialsGrid');
+    const form = document.getElementById('commentForm');
+    const nameInput = document.getElementById('nameInput');
+    const textInput = document.getElementById('textInput');
+    const stars = document.querySelectorAll('#rating span');
+    const notify = document.getElementById('notify');
+    const submitBtn = document.getElementById('submitComment');
+    let selectedRating = 5; // default 5
+
+    // show notification
+    function showNotify(msg, ms = 1800) {
+      notify.textContent = msg;
+      notify.style.display = 'block';
+      setTimeout(()=> notify.style.display = 'none', ms);
+    }
+
+    /*************** Stars (selection) ***************/
+    function updateStarUI(r) {
+      stars.forEach(s => { s.classList.toggle('selected', +s.dataset.value <= r); });
+    }
+    stars.forEach(s => {
+      s.addEventListener('click', () => {
+        selectedRating = +s.dataset.value;
+        updateStarUI(selectedRating);
+      });
+      s.addEventListener('keydown', e => {
+        if (e.key === 'Enter' || e.key === ' ') { selectedRating = +s.dataset.value; updateStarUI(selectedRating); e.preventDefault(); }
+      });
+    });
+    updateStarUI(selectedRating);
+
+    /*************** Render user comments ***************/
+    function createUserCard(comment) {
+      const card = document.createElement('div');
+      card.className = 'quote user-comment';
+      card.dataset.id = comment.id;
+
+      // build inner HTML (same structure as static quotes)
+      card.innerHTML = `
+        <div class="quote-header">
+          <div>
+            <div class="author">${escapeHtml(comment.name || 'زائر')}</div>
+            <div class="stars">${'★'.repeat(comment.rating)}${'☆'.repeat(5 - comment.rating)}</div>
+          </div>
+          <div class="options-menu">
+            <button class="options-btn" aria-haspopup="true" aria-expanded="false">⋮</button>
+            <ul class="options-list" role="menu">
+              <li class="edit-option" role="menuitem">✏️ تعديل</li>
+              <li class="delete-option" role="menuitem">🗑️ حذف</li>
+            </ul>
+          </div>
+        </div>
+        <div class="quote-text">${escapeHtml(comment.text)}</div>
+      `;
+
+      // attach menu behavior
+      attachOptionsMenu(card, comment.id);
+      return card;
+    }
+
+    function renderAllUserComments() {
+      // remove previous dynamic comments
+      document.querySelectorAll('.quote.user-comment').forEach(el=>el.remove());
+      // append saved comments (in chronological order: oldest first => appended after static)
+      userComments.forEach(c => testimonialsGrid.appendChild(createUserCard(c)));
+    }
+
+    // simple escape to avoid accidental HTML injection (keeps text simple)
+    function escapeHtml(str) {
+      return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    }
+
+    /*************** Options menu (edit/delete) ***************/
+    function attachOptionsMenu(card, commentId) {
+      const menu = card.querySelector('.options-menu');
+      const btn = menu.querySelector('.options-btn');
+      const list = menu.querySelector('.options-list');
+
+      // toggle
+      btn.addEventListener('click', (e)=>{
+        e.stopPropagation();
+        const isOpen = list.classList.contains('show');
+        closeAllMenus();
+        if (!isOpen) {
+          list.classList.add('show');
+          btn.setAttribute('aria-expanded','true');
+        }
+      });
+
+      // prevent clicks inside menu from bubbling
+      list.addEventListener('click', e => e.stopPropagation());
+
+      // edit
+      const editBtn = menu.querySelector('.edit-option');
+      editBtn.addEventListener('click', ()=>{
+        const comment = userComments.find(c=>c.id===commentId);
+        if(!comment) return;
+        const newText = prompt('✏️ عدل تعليقك:', comment.text);
+        if(newText === null) { list.classList.remove('show'); return; }
+        const trimmed = newText.trim();
+        if(trimmed.length===0) { alert('التعليق لا يمكن أن يكون فارغاً.'); return; }
+        comment.text = trimmed;
+        localStorage.setItem(KEY, JSON.stringify(userComments));
+        renderAllUserComments();
+        showNotify('تم تعديل تعليقك ✅');
+      });
+
+      // delete
+      const delBtn = menu.querySelector('.delete-option');
+      delBtn.addEventListener('click', ()=>{
+        if (!confirm('هل أنت متأكد من حذف التعليق؟')) { list.classList.remove('show'); return; }
+        userComments = userComments.filter(c=>c.id!==commentId);
+        localStorage.setItem(KEY, JSON.stringify(userComments));
+        renderAllUserComments();
+        showNotify('تم حذف التعليق ❌');
+      });
+    }
+
+    // close any open menus
+    function closeAllMenus(){
+      document.querySelectorAll('.options-list.show').forEach(l=>l.classList.remove('show'));
+      document.querySelectorAll('.options-btn[aria-expanded]')?.forEach(b=>b.setAttribute('aria-expanded','false'));
+    }
+
+    // close on outside click
+    document.addEventListener('click', closeAllMenus);
+    window.addEventListener('keydown', e=>{ if(e.key==='Escape') closeAllMenus(); });
+
+    /*************** Submit new comment ***************/
+    submitBtn.addEventListener('click', ()=>{
+      const text = textInput.value.trim();
+      const name = nameInput.value.trim() || 'زائر';
+      const rating = selectedRating || 5;
+      if(!text) { alert('من فضلك اكتب تعليقاً قبل الإرسال.'); return; }
+
+      const comment = { id: Date.now(), name, text, rating };
+      userComments.push(comment);
+      localStorage.setItem(KEY, JSON.stringify(userComments));
+
+      // append new comment to testimonials grid (same visual style)
+      testimonialsGrid.appendChild(createUserCard(comment));
+
+      // reset form
+      nameInput.value = '';
+      textInput.value = '';
+      selectedRating = 5; updateStarUI(selectedRating);
+
+      showNotify('تم إضافة تعليقك بنجاح ✅');
+
+      // small scroll to the added comment
+      setTimeout(()=>{
+        const el = document.querySelector('.quote.user-comment[data-id="'+comment.id+'"]');
+        if(el) el.scrollIntoView({behavior:'smooth', block:'center'});
+      }, 220);
+    });
+
+    /*************** Init render ***************/
+    // render saved user comments on load
+    renderAllUserComments();
+
+    /*************** Small extras: navbar hide on scroll + active links ***************/
+    (function(){
+      let last = 0; const navEl = document.getElementById('navbar');
+      window.addEventListener('scroll', ()=>{
+        const cur = window.pageYOffset;
+        if (cur>last) navEl.classList.add('hidden'); else navEl.classList.remove('hidden');
+        last = cur;
+      });
+
+      // active links
+      const sections = document.querySelectorAll('section, header.hero');
+      const links = document.querySelectorAll('.menu a');
+      window.addEventListener('scroll', ()=>{
+        let current = '';
+        sections.forEach(sec=>{ const top = sec.offsetTop - 140; if (pageYOffset >= top) current = sec.id; });
+        links.forEach(a=>{ a.classList.toggle('active', a.getAttribute('href') === '#'+current); });
+      });
+    })();
+
+  </script>
+</body>
+</html>
+ 
